@@ -1,0 +1,8 @@
+<p>students list</p>
+<ul>
+  <li *ngFor="let student of students | async">
+    <div><span> id: {{student.id}}</span></div>
+    <div><span>name: {{student.name}}</span></div>
+    <div><span >gpa: {{student.gpa}}</span></div>
+  </li>
+</ul>
