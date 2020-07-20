@@ -1,8 +1,33 @@
-<p>students list</p>
-<ul>
-  <li *ngFor="let student of students | async">
-    <div><span> id: {{student.id}}</span></div>
-    <div><span>name: {{student.name}}</span></div>
-    <div><span >gpa: {{student.gpa}}</span></div>
-  </li>
-</ul>
+<h3>Students</h3>
+<div>
+  <table style="align-items: center;">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Gpa</th>
+    </tr>
+    <tr *ngFor="let stud of students">
+      <td>{{stud.id}}</td>
+      <td>{{stud.name}}</td>
+      <td>{{stud.gpa}}</td>
+    </tr>
+  </table>
+<button (click) = "getStudents()">Refresh</button>
+</div>
+<div>
+  <h3>Search student</h3>
+  Enter student id: <input [(ngModel)]="id" placeholder="id" type="number"/><br>
+  <button (click) = "getStudent()">Search</button>
+  <table style="align-items: center;">
+    <tr *ngIf="student">
+      <th>Id</th>
+      <th>Name</th>
+      <th>Gpa</th>
+    </tr>
+    <tr>
+      <td>{{student.id}}</td>
+      <td>{{student.name}}</td>
+      <td>{{student.gpa}}</td>
+    </tr>
+  </table>
+</div>
