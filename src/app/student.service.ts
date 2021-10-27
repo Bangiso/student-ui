@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Student } from './student';
-import { Observable } from 'rxjs';
+import { isEmpty, Observable } from 'rxjs';
+import { isDefined } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -18,17 +19,20 @@ export class StudentService {
       'Content-Type':  'application/json'
   })
   };
-  url = 'http://localhost:8088/student';
+  url = 'http://localhost:8088/students';
+
   addStudent() {
-    console.log(this.studentUpdate);
-    return this.http.post<Student>(this.url, JSON.stringify(this.studentUpdate), this.httpOptions).
-    subscribe();
+    if(Object.keys(this.studentUpdate).length!=0){
+      this.http.post<Student>(this.url, JSON.stringify(this.studentUpdate), this.httpOptions).
+      subscribe();
+    }
+    return null;
   }
 
   getStudents(): Observable<Student[]> {
-    return this.http.get<Student[]>(this.url + 's/all');
+    return this.http.get<Student[]>(this.url + '/all');
   }
   getStudent(): Observable<Student> {
-    return this.http.get<Student>(this.url + `s/${this.id}`);
+    return this.http.get<Student>(this.url + `/${this.id}`);
 }
 }
