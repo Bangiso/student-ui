@@ -8,6 +8,7 @@ import {StudentService} from '../student.service';
   styleUrls: ['./students.component.css']
 })
 export class StudentsComponent implements OnInit {
+  title = "students";
   students: Student[];
   student: Student;
   id: number;
@@ -18,8 +19,7 @@ export class StudentsComponent implements OnInit {
   });
   }
   getStudent() {
-    this.studentService.id = this.id;
-    this.studentService.getStudent()
+    this.studentService.getStudent(this.id)
     .subscribe((stud: Student) => {
       this.student = stud;
     });

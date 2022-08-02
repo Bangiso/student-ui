@@ -1,0 +1,19 @@
+<div>
+<div *ngIf="id; else notfound;" class="text-center">
+  <div class="alert alert-success" role="alert">
+    <p> Student deleleted, successfully!!</p>
+  </div>
+</div>
+<ng-template #notfound>
+  <h1>No student found</h1>
+</ng-template>
+<div class="dispace">
+  <div >
+      <a [routerLink]="['/students']"> Back to student list</a>
+  </div>
+  <div >
+      <a [routerLink]="['/student-update']">Add Student</a>
+  </div>
+</div>
+</div>
+
