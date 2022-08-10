@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-ui
+spec:
+  selector:
+    matchLabels:
+      app: student-ui
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: student-ui
+    spec:
+      containers:
+        - image: aphiwe2020/student-ui:0.0.5
+          name: student-ui
+          ports:
+            - containerPort: 4200
+              name: student-ui
+          livenessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            exec:
+              command:
+                - ls
+                - root/ 
+          readinessProbe:
+            initialDelaySeconds: 4
+            periodSeconds: 5
+            successThreshold: 3
+            exec:
+              command:
+                - ls
+                - root/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-ui-svc
+spec:
+  ports:
+    - port: 4200
+      targetPort: 80
+  selector:
+    app: student-ui
+  externalTrafficPolicy: Local
+  type: LoadBalancer
